@@ -1,0 +1,19 @@
+body {
+  padding-top: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
+}
+
+a {
+  color: #00B7FF;
+}
+#gameCanvas{
+  border:1px solid #000000;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
+}
