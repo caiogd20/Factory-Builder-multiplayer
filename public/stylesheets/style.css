@@ -1,19 +1,33 @@
 body {
-  padding-top: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  
+  margin: 0;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1a1a2e; /* Azul marinho muito escuro */
+  color: #e2e2e2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-a {
-  color: #00B7FF;
+#resourcesDisplay {
+  background: #16213e;
+  padding: 15px 30px;
+  border-radius: 8px;
+  border: 2px solid #0f3460;
+  font-size: 24px;
+  font-weight: bold;
+  color: #4cc9f0;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-#gameCanvas{
-  border:1px solid #000000;
-  width: 500px;
-  height: 500px;
-  margin: 0 auto;
-  display: block;
+
+#gameCanvas {
+  border: 4px solid #0f3460;
+  background-color: #0f3460; /* Cor do fundo do mapa */
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
   image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  image-rendering: -moz-crisp-edges;
+  /* O tamanho visual no CSS pode ser maior para facilitar o clique */
+  width: 600px;
+  height: 600px;
+  cursor: crosshair;
 }

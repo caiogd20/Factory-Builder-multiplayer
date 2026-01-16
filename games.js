@@ -16,6 +16,7 @@ module.exports = function (io) {
         if (producaoNesteTick > 0) {
             resources += producaoNesteTick;
             // Avisa todos os jogadores o novo total de recursos
+            console.log(`Recursos atualizados: ${resources} (+${producaoNesteTick})`);
             io.emit('resourceUpdate', { total: resources, gain: producaoNesteTick });
         }
     }, 1000); // Roda uma vez por segundo ⏱️
@@ -25,6 +26,7 @@ module.exports = function (io) {
         // Envia o mapa atual para o novo jogador
         for (const pos in worldMap) {
             socket.emit('update', { ...worldMap[pos], x: pos.split(',')[0], y: pos.split(',')[1] });
+            console.log('Enviando construção existente para o novo jogador:', worldMap[pos]); //
         }
 
         socket.on('playerMove', (data) => { //

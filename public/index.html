@@ -8,8 +8,12 @@
 </head>
 <body>
   <main>
-    <canvas id="gameCanvas" width="50" height="50"></canvas>
-  </main>
+  <div id="resourcesDisplay">
+    <span style="font-size: 14px; display: block; color: #888;">CRÉDITOS DISPONÍVEIS</span>
+    $ <span id="resourceValue">0</span>
+  </div>
+  <canvas id="gameCanvas" width="50" height="50"></canvas>
+</main>
   <script src="/socket.io/socket.io.js"></script>
   <script type="module" src="/javascripts/gamec.js"></script>
 </body>
