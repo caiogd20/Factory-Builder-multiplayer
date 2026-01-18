@@ -29,16 +29,26 @@ module.exports = function (io) {
             console.log('Enviando construção existente para o novo jogador:', worldMap[pos]); //
         }
 
-        socket.on('playerMove', (data) => { //
-            const posKey = `${data.x},${data.y}`;
-            
-            // Validação simples: só constrói se estiver vazio
-            if (!worldMap[posKey]) {
-                worldMap[posKey] = { type: data.type };
-                // Avisa todos os jogadores sobre a nova construção
-                io.emit('update', data); //
-            }
-        });
+        socket.on('playerMove', (data) => {
+    const posKey = `${data.x},${data.y}`;
+    const PRECO_MINERADOR = 50; // Definimos um custo
+
+    const mapaVazio = Object.keys(worldMap).length === 0;
+    const custoAtual = mapaVazio ? 0 : PRECO_MINERADOR;
+
+    // Precisamos de uma condição extra aqui:
+    if (!worldMap[posKey] && resources >= custoAtual) {
+        resources -= custoAtual; // Deduz o valor
+        worldMap[posKey] = { type: data.type };
+        
+        // Avisamos sobre a construção e o novo saldo
+        io.emit('update', data); 
+        io.emit('resourceUpdate', { total: resources, gain: 0 });
+    }else if (resources < PRECO_MINERADOR) {
+        // Se não tiver dinheiro, avisamos apenas o jogador que tentou construir
+        socket.emit('error_msg', 'Créditos insuficientes!');
+    }
+});
 
         socket.on('disconnect', () => {
             console.log('Jogador saiu.'); //

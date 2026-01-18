@@ -3,23 +3,14 @@ const socket = io(); //
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const resourceValue = document.getElementById('resourceValue');
+const resourcesDisplay = document.getElementById('resourcesDisplay');
 
 const gameState = {}; // Armazena as construções: { "x,y": { type: 'machine' } }
 
-function drawGrid() {
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.05)"; // Linhas sutis
-    ctx.lineWidth = 0.1;
-    for (let i = 0; i < canvas.width; i++) {
-        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
-    }
-}
+
 function render() {
-    // Fundo
-    ctx.fillStyle = '#16213e';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    drawGrid();
+    //
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (const pos in gameState) {
         const [x, y] = pos.split(',').map(Number);
@@ -54,4 +45,11 @@ socket.on('update', (data) => { //
 
 socket.on('resourceUpdate', (data) => {
     resourceValue.innerText = data.total;
+});
+
+socket.on('error_msg', (msg) => {
+    resourcesDisplay.style.color = 'red';
+    setTimeout(() => {
+        resourcesDisplay.style.color = '#4cc9f0';
+    }, 1000);
 });
